@@ -35,6 +35,8 @@ Finally, we created a `DURATION_IN_HOURS` column from `OUTAGE.DURATION`, which w
 
 Below shows the head of the cleaned dataset:
 
+(insert dataset1)
+
 ### Univariate Graphs
 
 We first visualized the distribution of outage duration in hours, `DURATION_IN_HOURS`.
