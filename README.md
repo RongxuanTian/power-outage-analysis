@@ -51,7 +51,7 @@ We also examined the distribution of electricity consumption in residential sect
 
 By the histogram, it seems that for most of the outages, the region in which they occur has fallen under consuming 5 million megawatt-hours. This perhaps suggests that outages may be more common in less energy-intensive residential areas and that the bulk of outages lasting less than 24 hours occur in regions with less than 5 million megawatt-hours of consumption.
 
-## Bivariate Graphs
+### Bivariate Graphs
 
 (insert Bi graph 1)
 
