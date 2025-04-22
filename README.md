@@ -8,12 +8,12 @@ In this report, we focus specifically on the duration of each power outage and t
 
 Hence, we will be looking at the following columns/features:
 
-- `{OUTAGE.DURATION}`: Duration of outage events (in minutes)  
-- `{POPDEN_URBAN}`: Population density of the urban areas (persons per square mile)  
-- `{AREAPCT_URBAN}`: Percentage of the land area of the U.S. state represented by the land area of the urban areas  
-- `{RES.SALES}`: Electricity consumption in the residential sector (megawatt-hour)  
-- `{RES.PRICE}`: Monthly electricity price in the residential sector (cents/kilowatt-hour)  
-- `{RES.CUST.PCT}`: Percent of residential customers served in the U.S. state (in %)
+- `OUTAGE.DURATION`: Duration of outage events (in minutes)  
+- `POPDEN_URBAN`: Population density of the urban areas (persons per square mile)  
+- `AREAPCT_URBAN`: Percentage of the land area of the U.S. state represented by the land area of the urban areas  
+- `RES.SALES`: Electricity consumption in the residential sector (megawatt-hour)  
+- `RES.PRICE`: Monthly electricity price in the residential sector (cents/kilowatt-hour)  
+- `RES.CUST.PCT`: Percent of residential customers served in the U.S. state (in %)
 
 The motivation behind selecting these features is that urban environment and density could affect outage risk due to infrastructure stress. Economic characteristics of electricity also inform us about the residential demand for electricity, especially in urban neighborhoods. Hence, investigating these factors seems crucial to understanding how urban areas might influence power outages.
 
@@ -21,23 +21,23 @@ The motivation behind selecting these features is that urban environment and den
 
 ### Data Cleaning and Imputation
 
-Two redundant columns were dropped using `{.drop()}`. The `{variables}` column, which contains only `{NaN}` values, was dropped. The `{OBS}` column, which only contains the index for each of the rows, was dropped as a column and used as the index for the DataFrame using `{.set_index()}`. The six features above were originally in simple objects, so they were converted to floats (`{float64}`).
+Two redundant columns were dropped using `.drop()`. The `variables` column, which contains only `NaN` values, was dropped. The `OBS` column, which only contains the index for each of the rows, was dropped as a column and used as the index for the DataFrame using `.set_index()`. The six features above were originally in simple objects, so they were converted to floats (`float64`).
 
 The first row of the DataFrame contained units by which the column is measured; this was dropped to ensure the DataFrame only contained actual data.
 
-We also checked whether there were any missing values from the features. `{OUTAGE.DURATION}`, `{RES.SALES}`, `{RES.PRICE}`, and `{POPDEN_URBAN}` all had missing values.
+We also checked whether there were any missing values from the features. `OUTAGE.DURATION`, `RES.SALES`, `RES.PRICE`, and `POPDEN_URBAN` all had missing values.
 
-For `{OUTAGE.DURATION}`, out of the 1,534 rows containing actual data, 58 rows had `{nan}` values. Since `{OUTAGE.DURATION}` is the target variable we are trying to predict, we decided to drop these rows to avoid interfering with the prediction process.
+For `OUTAGE.DURATION`, out of the 1,534 rows containing actual data, 58 rows had `nan` values. Since `OUTAGE.DURATION` is the target variable we are trying to predict, we decided to drop these rows to avoid interfering with the prediction process.
 
-For `{RES.SALES}`, `{RES.PRICE}`, and `{POPDEN_URBAN}`, we used probabilistic imputation to fill in the missing values based on the state of each region, since we know these features are mostly dependent on their location. We also avoided mean imputation to prevent artificial spikes.
+For `RES.SALES`, `RES.PRICE`, and `POPDEN_URBAN`, we used probabilistic imputation to fill in the missing values based on the state of each region, since we know these features are mostly dependent on their location. We also avoided mean imputation to prevent artificial spikes.
 
-Finally, we created a `{DURATION_IN_HOURS}` column from `{OUTAGE.DURATION}`, which was measured in minutes, since expressing outage duration in hours offers a more interpretable unit for analysis—especially when comparing longer outages across different states.
+Finally, we created a `DURATION_IN_HOURS` column from `OUTAGE.DURATION`, which was measured in minutes, since expressing outage duration in hours offers a more interpretable unit for analysis—especially when comparing longer outages across different states.
 
 Below shows the head of the cleaned dataset:
 
 ### Univariate Graphs
 
-We first visualized the distribution of outage duration in hours, `{DURATION_IN_HOURS}`.
+We first visualized the distribution of outage duration in hours, `DURATION_IN_HOURS`.
 
 (insert uni graph 1)
 
