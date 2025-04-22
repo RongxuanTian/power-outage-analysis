@@ -2,9 +2,9 @@
 
 ## Introduction
 
-This report explores data on past major power outages collected by Sayanti Mukherjee, Roshanak Nateghi, and Makarand Hastak from their [paper](https://www.sciencedirect.com/science/article/pii/S2352340918307182). The dataset contains 1,536 rows and 57 columns, where each row corresponds to an occurrence of a power outage in the continental U.S., and each column represents a unique feature of the event. The features span across domains such as temporal information, causes, economic characteristics of the region, population of the region, etc.
+This report explores data on past major power outages in the U.S. collected by Sayanti Mukherjee, Roshanak Nateghi, and Makarand Hastak from their [paper](https://www.sciencedirect.com/science/article/pii/S2352340918307182). The dataset contains 1,536 rows and 57 columns, where each row corresponds to an occurrence of a power outage in the continental U.S., and each column represents a unique feature of the event. The features span across domains such as temporal information, causes, economic characteristics of the region, population of the region, etc.
 
-In this report, we focus specifically on the duration of each power outage and the urban population and economic information of the region in which the outage occurred. We aim to understand how the urban population and economic characteristics of the region affect the duration of the power outage.
+In this report, we focus specifically on the duration of each power outage and the urban population and economic information of the region in which the outage occurred. We aim to understand *how the urban population and economic characteristics of the region affect the duration of the power outage*.
 
 Hence, we will be looking at the following columns/features:
 
