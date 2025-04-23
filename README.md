@@ -87,6 +87,8 @@ For the second graph, we would like to see the distribution of the different cau
 
 It seems that different causes do have correlation with outage duration. Intentional attack, equipment failure, operability failure all have lower outage duration times since their range falls under 50 hours. As such, if the outage duration is significantly longer, we can quite reliably deduce that it is most probably either fuel supply emergency or severe weather. As such, causes of outage could potentially be a reliable indicator of outage duration. More to note, seven outliers lie outside of five hundred hours hence are ignored from the plot for better visualization purposes.
 
+### Aggregate Table
+
 The below aggregate table shows the mean value for all of the features: 'RES.SALES', 'RES.PRICE', 'POPDEN_URBAN', 'RES.CUST.PCT', 'AREAPCT_URBAN' for each U.S. state. It appears that for most features, there is little drastic variation for most U.S. states, which suggests that perhaps each state where the outage occurs might not provide the most salient information.
 
  <iframe src="assets/agg_table.html" width="800" height="400" frameborder="0">
