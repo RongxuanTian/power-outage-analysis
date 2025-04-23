@@ -97,3 +97,67 @@ For the second graph, we would like to see the distribution of the different cau
 
  <iframe src="assets/agg_table.html" width="800" height="400" frameborder="0">
 </iframe>
+
+
+## Prediction Problem
+
+We would like to know how long the duration of the outage will last based on information about urban population and economic characteristics. As such, the goal of the model is to predict outage duration `OUTAGE.DURATION` using urban population density `POPDEN_URBAN`, percentage of urban land area of the total state area `AREAPCT_URBAN`, residential electricity consumption `RES.SALES`, monthly electricity price in the residential sector `RES.PRICE`, and percent of residential customers served `RES.CUST.PCT`.  
+
+The response variable is `OUTAGE.DURATION`, measured in minutes. This is one of the most pertinent variables that inform us about the severity and effect of an outage. This is a regression problem since we are trying to predict duration, a single, continuous, numerical variable. 
+
+The metric in which we choose to evaluate our model is Mean Squared Error since it is the most appropriate to capture the average distance between the prediction and the actual data for a linear regression model. The higher the difference between the predicted and the actual, the more penalty is placed—this is something we would like to emphasize. Using mean absolute error would not emphasize this difference. We would also pay attention to the R² score of the model which informs us how well our features are able to capture the actual outage duration.
+
+At the time of the prediction, we would know all of the population and economic information regarding the region as they would remain the same before and after the outage. Hence using the features to predict outage duration is feasible in the real world. Data such as number of customers affected and demand loss, which can be collected after the outage has occurred, will not be included.
+
+
+## Baseline Model
+
+Our initial, baseline model is a multilinear regression model trained on five features:
+
+- `POPDEN_URBAN`: quantitative data - urban population density  
+- `AREAPCT_URBAN`: quantitative data - percentage of urban land area of the total state area  
+- `RES.SALES`: quantitative data - residential electricity consumption  
+- `RES.PRICE`: quantitative data - monthly electricity price in the residential sector  
+- `RES.CUST.PCT`: quantitative data - percent of residential customers served  
+
+We then calculated the MSE for both predictions based on training data and testing data. The size of the MSE depends on the actual values from the data, hence MSE by itself does not offer much insight into the exact accuracy of our prediction. To better assess the model's performance, we compared the MSEs of our predictions to the variances of the actual outage durations in the training and testing sets. The variances of the training and testing data can be considered as the MSE of the constant function that always predicts the mean outage duration. Therefore, if our linear regression model were to yield meaningful predictions, the MSE of the predictions based on the training and testing data should be significantly lower than the variances of the actual outage durations from the training and testing data.
+
+We also examined the R² value for the model to observe how strongly our selected features correlate with the actual values. Since all of our five features are quantitative, we didn’t need to include any encodings which would have been necessary for categorical features.
+
+The MSE obtained from comparing the prediction from training data and the actual power outage durations from training data is about `35282348.03`, the variance of the outage durations from the training data set is `35433163.42`. There is no noticeable difference between the variance and the MSE. The baseline regression model doesn’t seem to produce any meaningful predictions since it appears that it doesn’t do any better than the constant function that predicts the mean.
+
+Looking at the results from the testing data, the MSE obtained from comparing the prediction and the actual outage durations from testing data is about `34875044.02` and the variance of the outage durations from testing data is about `34798811.40`. Once again, this confirms that our regression baseline did not meaningfully capture anything and did not do any better than a constant model.
+
+Examining the R² value for our model, it also shows the features have very little correlation with the target variable as the R² value is `0.00425`, which is extremely weak.
+
+
+## Final Model
+
+From the R² value of the baseline model, we can tell that the features we have selected are not the best for predicting duration. Hence, for the final model, we would like to change certain features and include new ones. 
+
+The eventual features that were used were:
+
+- `CUSTOMERS.AFFECTED`: quantitative data  
+- `CAUSE.CATEGORY`: nominal data  
+- `AREAPCT_URBAN`: quantitative data - percentage of urban land area of the total state area  
+- `RES.SALES`: quantitative data - residential electricity consumption  
+- `RES.CUST.PCT`: quantitative data - percent of residential customers served  
+
+`RES.PRICE` was excluded since it bears similarity to `RES.SALES`. `CAUSE.CATEGORY` is included since, as shown from the bivariate graph, different causes seem to have variation on the duration of the outage, hence it could have more correlation with outage duration. `CUSTOMERS.AFFECTED` is also included since it bears relation to urban population density—as the higher the density, the more customers are expected to be affected by the outage. 
+
+It's key to note that `CUSTOMERS.AFFECTED` had several missing rows. We eventually decided that it was not appropriate to impute these values as:  
+1) There is no good method to impute—unlike previous probabilistic imputations, `CUSTOMERS.AFFECTED` is not state-dependent.  
+2) Since this is the value we are trying to use for prediction, imputing it could lead to misalignment with the real world.  
+
+As such, we dropped the rows in which `CUSTOMERS.AFFECTED` had missing values.
+
+Since we are using a nominal variable this time, we used `OneHotEncoder` to encode the variable later for regression. Moreover, we first fitted `CUSTOMERS.AFFECTED`, `RES.CUST.PCT`, `RES.SALES`, `AREAPCT_URBAN` to polynomial features. Previous baseline attempts at fitting the features using linear regression didn’t work well. This could suggest that the shape of the features is too complex and that the relationship between the features is non-linear. Therefore, to increase complexity in fitting, we selected `PolynomialFeatures()` to better accommodate their non-linearity. After applying transformations on these features, we applied linear regression to fit the data.
+
+The hyperparameter we varied is the degree of the polynomial features applied to the four quantitative features. We tried degrees between 1 and 20. The higher the degree, the more concavity there is to the relationship between the four quantitative features. We performed 5-fold cross-validation to evaluate the hyperparameters and we used negative mean absolute error for scoring. The result showed that a polynomial of degree 3 best fits the data, which shows that the relation between the four quantitative features is not extremely intricate.
+
+Same as the baseline model, we observed the variance of the actual data and MSE between prediction and the actual data as well as the R² score. The variance of the training data is `20485458.09` and the MSE between prediction and the actual training data is `15976629.97`, demonstrating a noticeable decrease compared to the baseline model. The variance of the testing data is `17280608.55` and the MSE between prediction and the actual testing data is `15955072.49`, demonstrating a decrease less than that of the training data but still better compared to the baseline. The R² value of the prediction is `0.22`. This is not a very high score, but still an improvement from the baseline.
+
+Since incorporating the `CUSTOMERS.AFFECTED` feature caused us to clean the data again, this means that we have changed the training and testing data that we had for the baseline. As such, we re-fitted the baseline model with the new training data and made predictions.
+
+The new R² value for the baseline prediction is `0.012`, much lower than the R² value for the final model.  
+The MSE of the prediction for training data is `20232003.54` and the MSE of testing data is `17181913.56`. Both of which are much closer to the variance of the actual data than the final model.
