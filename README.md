@@ -35,7 +35,8 @@ Finally, we created a `DURATION_IN_HOURS` column from `OUTAGE.DURATION`, which w
 
 Below shows the head of the cleaned dataset:
 
-(insert dataset1)
+<iframe src="assets/clean_table.html" width="800" height="400" frameborder="0">
+</iframe>
 
 ### Univariate Graphs
 
