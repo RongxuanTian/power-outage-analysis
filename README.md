@@ -1,4 +1,4 @@
-# Can you tell the outage duration from the urban population and economic characteristics of the region?
+# Predicting outage duration from the urban population and economic characteristics of the region?
 
 ## Introduction
 
