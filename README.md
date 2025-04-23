@@ -82,7 +82,7 @@ For the second graph, we would like to see the distribution of the different cau
  frameborder="0"
  ></iframe>
 
-
+It seems that different causes do have correlation with outage duration. Intentional attack, equipment failure, operability failure all have lower outage duration times since their range falls under 50 hours. As such, if the outage duration is significantly longer, we can quite reliably deduce that it is most probably either fuel supply emergency or severe weather. As such, causes of outage could potentially be a reliable indicator of outage duration. More to note, seven outliers lie outside of five hundred hours hence are ignored from the plot for better visualization purposes.
 
 
 
@@ -137,8 +137,8 @@ From the R² value of the baseline model, we can tell that the features we have 
 
 The eventual features that were used were:
 
-- `CUSTOMERS.AFFECTED`: quantitative data  
-- `CAUSE.CATEGORY`: nominal data  
+- `CUSTOMERS.AFFECTED`: quantitative data  - Numer of residential customers affected
+- `CAUSE.CATEGORY`: nominal data  - Types of causes
 - `AREAPCT_URBAN`: quantitative data - percentage of urban land area of the total state area  
 - `RES.SALES`: quantitative data - residential electricity consumption  
 - `RES.CUST.PCT`: quantitative data - percent of residential customers served  
