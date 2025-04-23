@@ -48,7 +48,7 @@ We first visualized the distribution of outage duration in hours, `DURATION_IN_H
 <iframe
  src="assets/uni1.html"
  width="800"
- height="600"
+ height="400"
  frameborder="0"
  ></iframe>
 
@@ -59,7 +59,7 @@ We also examined the distribution of electricity consumption in residential sect
 <iframe
  src="assets/uni2.html"
  width="800"
- height="600"
+ height="400"
  frameborder="0"
  ></iframe>
 
