@@ -42,22 +42,58 @@ Below shows the head of the cleaned dataset:
 
 We first visualized the distribution of outage duration in hours, `DURATION_IN_HOURS`.
 
-(insert uni graph 1)
+<iframe
+ src="assets/uni1.html"
+ width="800"
+ height="600"
+ frameborder="0"
+ ></iframe>
 
 The pink dashed line indicates the 24-hour mark, when the outage duration lasts for a day. By the plot, it seems that over half of the outages lasted less than a day. As such, most of the outages are fixed very quickly. It is also worth noting that eight outages lasted longer than 480 hours; hence, they are excluded from the graph for better visualization purposes.
 
 We also examined the distribution of electricity consumption in residential sectors.
 
-(insert uni graph 2)
+<iframe
+ src="assets/uni2.html"
+ width="800"
+ height="600"
+ frameborder="0"
+ ></iframe>
 
 By the histogram, it seems that for most of the outages, the region in which they occur has fallen under consuming 5 million megawatt-hours. This perhaps suggests that outages may be more common in less energy-intensive residential areas and that the bulk of outages lasting less than 24 hours occur in regions with less than 5 million megawatt-hours of consumption.
 
 ### Bivariate Graphs
 
-(insert Bi graph 1)
+<iframe
+ src="assets/biv1.html"
+ width="800"
+ height="600"
+ frameborder="0"
+ ></iframe>
 
 Looking at the scatter plot, there doesn’t seem to be much correlation between electricity consumption and outage duration as previously thought when examining the univariate graphs. A good number of outages that lasted more than 24 hours occurred in regions with more than 5 million megawatt-hours of consumption. This suggests that electricity consumption is not linearly correlated with the duration of outages.
 
 For the second graph, we would like to see the distribution of the different causes in relation to outage duration.
 
-(insert Bi graph 2)
+<iframe
+ src="assets/biv2.html"
+ width="800"
+ height="600"
+ frameborder="0"
+ ></iframe>
+
+
+
+
+
+<iframe
+ src="assets/biv3.html"
+ width="800"
+ height="600"
+ frameborder="0"
+ ></iframe>
+
+
+
+ <iframe src="assets/agg_table.html" width="800" height="400" frameborder="0">
+</iframe>
