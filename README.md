@@ -1,6 +1,7 @@
 ---
 title: ""
 ---
+
 # Predicting outage duration from the urban population and economic characteristics of the region?
 
 Rongxuan Tian
